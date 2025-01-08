@@ -27,10 +27,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Image.asset(
+        title: NormalText(
+          title: 'NEFTLIX',
+          color: Color(0xFFe50912),
+          fontWeight: FontWeight.bold,
+          fontSize: 30,
+        ),
+        /*Image.asset(
           'assets/png/netflix_logo.png',
           height: 80,
-        ),
+        ),*/
         backgroundColor: Colors.black,
         actions: [
           IconButton(

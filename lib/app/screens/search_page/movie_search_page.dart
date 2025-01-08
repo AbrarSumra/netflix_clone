@@ -50,7 +50,7 @@ class MovieSearchDelegate extends SearchDelegate {
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          query = ''; // Clears the search query
+          query = '';
         },
       ),
     ];
@@ -76,94 +76,7 @@ class MovieSearchDelegate extends SearchDelegate {
             );
           } else {
             List<Show> shows = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: shows.length,
-                itemBuilder: (context, index) {
-                  final show = shows[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieDetailsScreen(
-                              show: show,
-                              listShows: shows,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          show.image != null
-                              ? Image.network(
-                                  show.image!.medium,
-                                  height: 120,
-                                )
-                              : Image.asset(
-                                  'assets/img/netflix_img.jpeg',
-                                  height: 120,
-                                ),
-                          const SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 250,
-                                child: NormalText(
-                                  title: show.name,
-                                  color: Colors.white,
-                                  textOverflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  const NormalText(
-                                    title: 'Language : ',
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                  NormalText(
-                                    title: show.language,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const NormalText(
-                                    title: 'Description : ',
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 200,
-                                    child: NormalText(
-                                      title: show.summary,
-                                      color: Colors.white,
-                                      textOverflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
+            return searchResult(shows: shows);
           }
         },
       ),
@@ -190,95 +103,103 @@ class MovieSearchDelegate extends SearchDelegate {
             );
           } else {
             List<Show> shows = snapshot.data!;
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.builder(
-                itemCount: shows.length,
-                itemBuilder: (context, index) {
-                  final show = shows[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieDetailsScreen(
-                              show: show,
-                              listShows: shows,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            return searchResult(shows: shows);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget searchResult({required List<Show> shows}) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView.builder(
+        itemCount: shows.length,
+        itemBuilder: (context, index) {
+          final show = shows[index];
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovieDetailsScreen(
+                      show: show,
+                      listShows: shows,
+                    ),
+                  ),
+                );
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  show.image != null
+                      ? Image.network(
+                          show.image!.medium,
+                          height: 100,
+                        )
+                      : Image.asset(
+                          'assets/img/netflix_img.jpeg',
+                          height: 120,
+                        ),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 250,
+                        child: NormalText(
+                          title: show.name,
+                          color: Colors.white,
+                          textOverflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Row(
                         children: [
-                          show.image != null
-                              ? Image.network(
-                                  show.image!.medium,
-                                  height: 120,
-                                )
-                              : Image.asset(
-                                  'assets/img/netflix_img.jpeg',
-                                  height: 120,
-                                ),
-                          const SizedBox(width: 10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: 250,
-                                child: NormalText(
-                                  title: show.name,
-                                  color: Colors.white,
-                                  textOverflow: TextOverflow.ellipsis,
-                                  maxLines: 2,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  const NormalText(
-                                    title: 'Language : ',
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                  NormalText(
-                                    title: show.language,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const NormalText(
-                                    title: 'Description : ',
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 200,
-                                    child: NormalText(
-                                      title: show.summary,
-                                      color: Colors.white,
-                                      textOverflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          const NormalText(
+                            title: 'Language : ',
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                          NormalText(
+                            title: show.language,
+                            color: Colors.white,
+                            fontSize: 12,
                           ),
                         ],
                       ),
-                    ),
-                  );
-                },
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const NormalText(
+                            title: 'Description : ',
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                          SizedBox(
+                            width: 180,
+                            child: NormalText(
+                              title: show.summary,
+                              color: Colors.white,
+                              textOverflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            );
-          }
+            ),
+          );
         },
       ),
     );

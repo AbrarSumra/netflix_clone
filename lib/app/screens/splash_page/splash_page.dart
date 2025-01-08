@@ -3,6 +3,8 @@ import 'dart:async';
 
 import 'package:netflix_clone/app/screens/home_page/home_page.dart';
 
+import '../widget/text_widget/normal_text.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -48,12 +50,19 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: Colors.black, // Netflix-style black background
       body: Center(
         child: FadeTransition(
-          opacity: _animation,
-          child: Image.asset(
+            opacity: _animation,
+            child: NormalText(
+              title: 'NEFTLIX',
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
+              fontSize: 50,
+            )
+
+            /*Image.asset(
             'assets/png/netflix_logo.png',
             width: 150, // Adjust size as needed
-          ),
-        ),
+          ),*/
+            ),
       ),
     );
   }
